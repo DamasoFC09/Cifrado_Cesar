@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1792/1792163.png" type="image/png">
+        <title>Cifrado César</title>
+        <style>
+            body {
+                background: radial-gradient(black, rgb(19, 19, 19));
+                margin: 0%;
+                text-align: center;
+            }
+
+            h1 {
+                color: whitesmoke;
+                font-weight: bold;
+                padding: 1rem;
+                font-size: 3rem;
+            }
+
+            textarea, input {
+                font-size: 1rem;
+                text-align: center;
+                width: 80%;
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: bold;
+                border-radius: 0.5rem;
+                border: none;
+                padding: 0.4rem;
+            }
+
+            button {
+                font-size: 1.5rem;
+                margin-top: 2rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding: 0.4rem;
+                background-color: black;
+                color: whitesmoke;
+                border-radius: 1rem;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .output {
+                color: whitesmoke;
+                font-size: xx-large;
+                margin: 2rem;
+            }
+
+            main {
+                background-color: rgb(43, 43, 43);
+                border-radius: 1rem;
+                margin-left: 15rem;
+                margin-right: 15rem;
+                margin-top: 6rem;
+                margin-bottom: 6rem;
+                padding: 1rem;
+            }
+
+            footer {
+                border-top: solid #363636 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>CIFRAR🔒     DESCIFRAR🔓</h1>
+
+            <textarea id="codigo" rows="4" placeholder="Escribe para Cifrar o Descifrar..."></textarea><br>
+
+            <input type="number" id="conversion" placeholder="Desplazamiento (ej:1)"><br>
+
+            <button onclick="cifrar()">CIFRAR🏴</button>
+            <button onclick="desifrar()">DESCIFRAR🚩</button>
+
+            <div class="output" id="resultado"></div>
+            </main>
+
+            <footer>
+                <p>© 2025 SPD. Todos los derechos reservados. Teléfono: +573126461720 Email: servicioprogramaciondiseno@gmail.com Telegram: @Damaso_Figueredo2</p>
+            </footer>
+
+        <script>
+            function cifrar() {
+                procesarcodigo(1);
+            }
+
+            function desifrar() {
+                procesarcodigo(-1);
+            }
+
+            function procesarcodigo(direccion) {
+                const texto = document.getElementById("codigo").value;
+                const despl = parseInt(document.getElementById("conversion").value);
+
+                const resultado = texto.split('').map(char => {
+                    if (char.match(/[a-z]/i)) {
+                        const base = char === char.toLowerCase() ? 97 : 65;
+                        return String.fromCharCode(
+                            (char.charCodeAt(0) - base + direccion * despl + 26) % 26 + base
+                        );
+                    } else {
+                        return char;
+                    }
+                }).join('');
+                
+                document.getElementById("resultado").textContent = resultado;
+            }
+        </script>
+    </body>
+</html>

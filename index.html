@@ -27,6 +27,8 @@
                 border-radius: 0.5rem;
                 border: none;
                 padding: 0.4rem;
+                background-color: #161616;
+                color: rgb(224, 224, 224);
             }
 
             button {
@@ -35,11 +37,18 @@
                 margin-left: 1rem;
                 margin-right: 1rem;
                 padding: 0.4rem;
-                background-color: black;
+                background: linear-gradient(black, rgb(24, 24, 24));
                 color: whitesmoke;
                 border-radius: 1rem;
                 font-weight: bold;
                 cursor: pointer;
+                border-style: double;
+                transition: border-style 10s ease;
+            }
+
+            button:hover {
+                border-style: none;
+                transition: border-style 10s ease;
             }
 
             .output {
@@ -60,6 +69,7 @@
 
             footer {
                 border-top: solid #363636 2px;
+                color: rgb(44, 44, 44);
             }
         </style>
     </head>
@@ -71,14 +81,14 @@
 
             <input type="number" id="conversion" placeholder="Desplazamiento (ej:1)"><br>
 
-            <button onclick="cifrar()">CIFRAR🏴</button>
-            <button onclick="desifrar()">DESCIFRAR🚩</button>
+            <button onclick="cifrar()">CIFRAR</button>
+            <button onclick="desifrar()">DESCIFRAR</button>
 
             <div class="output" id="resultado"></div>
             </main>
 
             <footer>
-                <p>© 2025 SPD. Todos los derechos reservados. Teléfono: +573126461720 Email: servicioprogramaciondiseno@gmail.com Telegram: @Damaso_Figueredo2</p>
+                <p>© 2025 SPD. Todos los derechos reservados. Teléfono: +57 3128137199 Email: servicioprogramaciondiseno@gmail.com Telegram: @Damaso_Figueredo</p>
             </footer>
 
         <script>

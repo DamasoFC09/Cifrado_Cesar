@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cifra y descifra mensajes con el cifrado César. Herramienta de SPD.">
+    <title>Cifrado César</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main class="window">
+        <!-- Barra tipo ventana de aplicación -->
+        <div class="window__bar" aria-hidden="true">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="window__title">cifrado-cesar.sh</span>
+        </div>
+
+        <div class="window__body">
+            <header class="hero">
+                <h1 class="title">
+                    <span class="title__word">
+                        CIFRAR
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="4" y="11" width="16" height="10" rx="2"/>
+                            <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+                        </svg>
+                    </span>
+                    <span class="title__sep" aria-hidden="true">/</span>
+                    <span class="title__word">
+                        DESCIFRAR
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="4" y="11" width="16" height="10" rx="2"/>
+                            <path d="M8 11V7a4 4 0 0 1 7.8-1.3"/>
+                        </svg>
+                    </span>
+                </h1>
+                <p class="subtitle">Cada letra se desplaza un número fijo de posiciones en el alfabeto.</p>
+            </header>
+
+            <div class="form">
+                <!-- Mensaje -->
+                <div class="field">
+                    <div class="field__head">
+                        <label for="codigo">Mensaje</label>
+                        <span id="contador">0 caracteres</span>
+                    </div>
+                    <textarea id="codigo" rows="4" spellcheck="false" placeholder="Escribe para Cifrar o Descifrar..."></textarea>
+                </div>
+
+                <!-- Desplazamiento -->
+                <div class="field">
+                    <div class="field__head">
+                        <label for="conversion">Desplazamiento</label>
+                        <span>ROT-<span id="rot">3</span></span>
+                    </div>
+                    <div class="stepper">
+                        <button type="button" class="stepper__btn" data-step="-1" aria-label="Disminuir desplazamiento">−</button>
+                        <input type="number" id="conversion" value="3" inputmode="numeric" placeholder="Desplazamiento (ej: 1)">
+                        <button type="button" class="stepper__btn" data-step="1" aria-label="Aumentar desplazamiento">+</button>
+                    </div>
+
+                    <!-- Vista previa del alfabeto desplazado -->
+                    <div class="alphabet" aria-hidden="true">
+                        <div class="alphabet__row" id="alfaPlano"></div>
+                        <div class="alphabet__row alphabet__row--shift" id="alfaCifrado"></div>
+                    </div>
+                </div>
+
+                <!-- Acciones -->
+                <div class="actions">
+                    <button type="button" class="btn" id="btnCifrar">
+                        CIFRAR
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="4" y="11" width="16" height="10" rx="2"/>
+                            <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="btn" id="btnDescifrar">
+                        DESCIFRAR
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="4" y="11" width="16" height="10" rx="2"/>
+                            <path d="M8 11V7a4 4 0 0 1 7.8-1.3"/>
+                        </svg>
+                    </button>
+                </div>
+                <p class="shortcut">
+                    <kbd>Ctrl</kbd> + <kbd>Enter</kbd> cifrar &nbsp;·&nbsp;
+                    <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd> descifrar
+                </p>
+            </div>
+
+            <!-- Resultado -->
+            <section class="output-wrap" aria-labelledby="resultado-label">
+                <div class="field__head">
+                    <span id="resultado-label">Resultado</span>
+                    <span class="badge" id="modo"></span>
+                </div>
+                <div class="output" id="resultado" aria-live="polite"></div>
+                <div class="output__tools">
+                    <button type="button" class="tool" id="btnCopiar" disabled>Copiar</button>
+                    <button type="button" class="tool" id="btnUsar" disabled>Usar como entrada</button>
+                    <button type="button" class="tool" id="btnLimpiar">Limpiar</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="anio">2025</span> SPD. Todos los derechos reservados.</p>
+        <ul class="footer__contact">
+            <li><span class="footer__label">Teléfono</span> <a href="tel:+573128137199">+57 312 813 7199</a></li>
+            <li><span class="footer__label">Email</span> <a href="mailto:servicioprogramaciondiseno@gmail.com">servicioprogramaciondiseno@gmail.com</a></li>
+            <li><span class="footer__label">Telegram</span> <a href="https://t.me/Damaso_Figueredo" target="_blank" rel="noopener">@Damaso_Figueredo</a></li>
+        </ul>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
